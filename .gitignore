@@ -1,0 +1,12 @@
+# Ignorar pastas geradas pela build
+bin/
+obj/
+
+# Ignorar configurações do Visual Studio
+.vs/
+*.user
+*.suo
+
+# Ignorar arquivos compilados
+*.exe
+*.dll
