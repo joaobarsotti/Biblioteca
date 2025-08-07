@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,24 +46,28 @@ namespace Biblioteca {
         static void CadastrarLivro() {
             Console.Clear();
             Console.WriteLine("CADASTRAR LIVRO\n");
-            /*
-            Console.WriteLine("Código: ");
-            int codigo = int.Parse(Console.ReadLine()!);
-                
-            Console.WriteLine("Autor: ");
-            string autor = Console.ReadLine()!;
-            */
+   
             Console.Write("Título: ");
             string titulo = Console.ReadLine()!;
 
-            // Console.WriteLine("Número de páginas: ");
-            // int paginas = int.Parse(Console.ReadLine()!);
+            Console.Write("Autor: ");
+            string autor = Console.ReadLine()!;
+
+            Console.Write("Categoria: ");
+            string categoria = Console.ReadLine()!;
+
+            Console.Write("Número de páginas: ");
+            int paginas = int.Parse(Console.ReadLine()!);
+
+            Console.Write("Status: ");
+            string status = Console.ReadLine()!;
 
             Livro novoLivro = new Livro() {
-                //Codigo = codigo,
-                // Autor = autor,
-                Titulo = titulo
-                // Paginas = paginas
+                Titulo = titulo,
+                Autor = autor,
+                Categoria = categoria,
+                Paginas = paginas,
+                Status = status
             };
 
             livros.Add(novoLivro);
@@ -75,16 +80,49 @@ namespace Biblioteca {
         static void AlterarLivro() {
             Console.Clear();
             Console.WriteLine("ALTERAR LIVRO \n");
-            Console.Write("Digite o código do livro que deseja alterar: ");
+            Console.Write("Digite o título do livro que deseja alterar: ");
             string titulo = Console.ReadLine()!;
 
             Livro livroParaAlterar = livros.Find(l => l.Titulo == titulo)!;
 
             if (livroParaAlterar != null) {
-                Console.WriteLine("Livro encontrado!");
-                Console.Write("Digite o novo título:");
+                Console.WriteLine("Livro encontrado! Informe os novos dados ou pressione enter para manter o valor atual:");
+
+                Console.WriteLine($"Título atual: {livroParaAlterar.Titulo}");
+                Console.Write("Novo título: ");
                 string novoTitulo = Console.ReadLine()!;
-                livroParaAlterar.Titulo = novoTitulo;
+                if (!string.IsNullOrWhiteSpace(novoTitulo)) {
+                    livroParaAlterar.Titulo = novoTitulo;
+                }
+
+                Console.WriteLine($"Autor atual: {livroParaAlterar.Autor}");
+                Console.Write("Novo autor: ");
+                string novoAutor = Console.ReadLine()!;
+                if (!string.IsNullOrWhiteSpace(novoAutor)) {
+                    livroParaAlterar.Autor = novoAutor;
+                }
+                
+                Console.WriteLine($"Categoria atual: {livroParaAlterar.Categoria}");
+                Console.Write("Nova categoria: ");
+                string novaCategoria = Console.ReadLine()!;
+                if (!string.IsNullOrWhiteSpace(novaCategoria)) {
+                    livroParaAlterar.Categoria = novaCategoria;
+                }
+
+                Console.WriteLine($"Número de Páginas atual: {livroParaAlterar.Paginas}");
+                Console.Write("Novo número de páginas: ");
+                string novoPaginas = Console.ReadLine()!;
+                if (!string.IsNullOrWhiteSpace(novoPaginas) && int.TryParse(novoPaginas, out int paginas)) {
+                    livroParaAlterar.Paginas = paginas;
+                }
+
+                Console.WriteLine($"Status atual: {livroParaAlterar.Status}");
+                Console.Write("Novo status: ");
+                string novoStatus = Console.ReadLine()!;
+                if (!string.IsNullOrWhiteSpace(novoStatus)) {
+                    livroParaAlterar.Status = novoStatus;
+                }
+
                 Console.WriteLine("Livro alterado com sucesso!");
             } else {
                     Console.WriteLine($"O livro {titulo} não foi encontrado!");
