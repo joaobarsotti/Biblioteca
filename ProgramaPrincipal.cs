@@ -140,7 +140,11 @@ namespace Biblioteca {
                 Console.WriteLine("Nenhum livro cadastrado");
             } else {
                 foreach (Livro livro in livros) {
-                    Console.WriteLine($"Título: {livro.Titulo}");
+                    Console.WriteLine($"\nTítulo: {livro.Titulo}");
+                    Console.WriteLine($"Autor: {livro.Autor}");
+                    Console.WriteLine($"Categoria: {livro.Categoria}");
+                    Console.WriteLine($"Número de páginas: {livro.Paginas}");
+                    Console.WriteLine($"Status: {livro.Status}");
                 }
             }
                 
@@ -153,17 +157,22 @@ namespace Biblioteca {
         static void ExcluirLivro() {
             Console.Clear();
             Console.WriteLine("EXCLUIR LIVRO\n");
-            Console.Write("Digite o código do livro que deseja excluir: ");
-            string titulo = Console.ReadLine()!;
-
-            Livro livroParaExcluir = livros.Find(l => l.Titulo == titulo)!;
-
-            if (livroParaExcluir != null) {
-                livros.Remove(livroParaExcluir);
-                Console.WriteLine("Livro excluído com sucesso!");
+            if (livros.Count == 0) {
+                Console.WriteLine("Nenhum livro cadastrado");
             } else {
-                Console.WriteLine($"O livro {titulo} não foi encontrado!");
+                Console.Write("Digite o título do livro que deseja excluir: ");
+                string titulo = Console.ReadLine()!;
+
+                Livro livroParaExcluir = livros.Find(l => l.Titulo == titulo)!;
+
+                if (livroParaExcluir != null) {
+                    livros.Remove(livroParaExcluir);
+                    Console.WriteLine("Livro excluído com sucesso!");
+                } else {
+                    Console.WriteLine($"O livro {titulo} não foi encontrado!");
+                }
             }
+            
             Console.WriteLine("Digite uma tecla para voltar ao menu principal");
             Console.ReadKey();
             Console.Clear();
